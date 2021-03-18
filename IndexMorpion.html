@@ -6,27 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="MorpionCss.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>Morpion</title>
 </head>
 
 <body>
     <main>
-        <header>
-            <div id="button">Reload Game</div>
+
+         <!-- Bloc du Haut -->
+
+        <header>                                                                
+            <div id="button">Reload Game</div>  
          <!--<button #id="reload" onclick="window.location.reload()"> 
                 Rejouer
             </button> -->
-            <h1 class="h1">Morpion By Shadow</h1><hr width="5%" size="5" color="#ffffff">
+            <img src="Versus.png" alt="Versus" id="versus" />
         </header>
+
+        <!-- Bloc Joueur Php -->
+
         <div id="container">
-            <article id="article">
+            <article id="article">                                              
                 <h2>Team Php</h2>
                 <img src="PhpLogo.png" alt="Team Php" id="LogoPhp" class="php" />
                 <div id="cross">
                     <h4>Score : <b id="player1">0</b></h4>
                 </div>
             </article>
-            <section id="section" class="allcase">
+
+        <!-- Bloc de jeu -->
+
+            <section id="section" class="allcase">                              
                 <div class="carre sangoku border_right"></div>
                 <div class="carre vegeta border_right"></div>
                 <div class="carre sangoku border_right"></div>
@@ -37,37 +48,46 @@
                 <div class="carre vegeta border_right"></div>
                 <div class="carre sangoku border_right"></div>
             </section>
-            <aside id="aside">
-                <h2>Team Java</h2>
+
+        <!-- Bloc Joueur JavaScript -->
+
+            <aside id="aside">                                                  
+                <h2>Team JavaScript</h2>
                 <img src="JavaLogo.png" alt="Team Java" id="LogoJava" class="java" />
                 <div id="circle">
                     <h4>Score : <b id="player2">0</b></h4>
                 </div>
-            </aside>
+            </aside>     
         </div>
-        <footer>
 
+        <!-- Bloc du Bas -->
+
+        <footer>                                                                
+            <h1 class="h1">Morpion By Shadow</h1><hr width="5%" size="5" color="#ffffff">
         </footer>
     </main>
     <script>
                                                 // j'initie toutes les variables dont j'aurais besoin
 
-        function init(playerToBegin){
-            game_over = false
-            tour = 0
-            current = playerToBegin
-            symbole = ["x", "o"]
-            cells = document.querySelectorAll(".carre")
-            score_j1 = document.querySelector("#player1")
-            score_j2 = document.querySelector("#player2")
-            for(let cell of cells){
-                cell.classList.remove("x", "o")
+        function init(playerToBegin){                           // Création de ma function jeu
+            game_over = false                                   // On commence le jeu avec la condition GameOve sur False
+            tour = 0                                            // On initie le premier tour sur 0  
+            current = playerToBegin                             // On crée la variable du joueur qui joue
+            symbole = ["x", "o"]                                // On crée la variable symbole
+            cells = document.querySelectorAll(".carre")         // On crée la variable cells en pointant tout les éléments avec la classe .carre
+            score_j1 = document.querySelector("#player1")       // On crée la variable score_j1 en pointant l'Id #player1
+            score_j2 = document.querySelector("#player2")       // On crée la variable score_j2 en pointant l'Id #player2
+            for(let cell of cells){                             // On crée une boucle qui parcourt les cells ayant la variable cell, les supprimes et les remplaces
+                cell.classList.remove("x", "o")                 // Par rien (Vide Les Cellules)
+                cell.innerHTML = ""
             }
         }
                                                 // je stocke la liste des cases, le nombre de tour, et un tableau des symboles dans des variables
 
-        let tour, game_over, symbole, cells, current, score_j1, score_j2
-                                                              
+        let tour, game_over, symbole, cells, current, score_j1, score_j2 // Création des variables dont j'aurais besoin
+           
+        // Création des conditions de victoires
+
         let winCase = {
             cond_one :[0,1,2],
             cond_two :[3,4,5],
@@ -79,18 +99,18 @@
             cond_eight :[2,4,6]
         }
 
-        init("x")
+        init("x")  // Initie la variable sur "x" au premier tout de jeu
 
-        for (let cell of cells) {                                     // Crée la variable cell en bouclant sur la varaiable cells
+        for (let cell of cells) {                                     // Crée la variable cell en bouclant sur la variable cells
             cell.addEventListener("click", function(){                // Ajoute l'évenement click à cell
             
-                if(cell.classList.length == 3 && !game_over){
-                    cell.classList.add(current)
-                    cell.innerHTML = current
+                if(cell.classList.length == 3 && !game_over){         // Compte le nombre de classe de cell, si = 3, et different de GameOver alors
+                    cell.classList.add(current)                       // Ajoute une classe "current" à la cellule
+                    cell.innerHTML = current                          // Ajoute en html le symbole du joueur qui joue
                      
                 }
 
-                let arr = Array.from(cells)
+                let arr = Array.from(cells)                           // Crée une variable arr sous forme de tableau en pointant cells
 
                 for(pattern in winCase){                                    // Patern parcours le Tableau
                     let pos = winCase[pattern]                              // je parcours un tableau de condition de victoires et je compare avec les cases remplies
@@ -121,8 +141,8 @@
             
         }
 
-        let button = document.querySelector("#button")
-        button.addEventListener("click", Event =>{
+        let button = document.querySelector("#button")              // Crée la variable button en pointant l'element #button dans l'html
+        button.addEventListener("click", Event =>{                  // Ajoute l'évenement click a button
         init(current)
         })
 

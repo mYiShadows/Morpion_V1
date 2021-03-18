@@ -6,4 +6,4 @@ Jeu de morpion
 - Score " On "
 - Button Relaod " On "
 - Décors " On "
-- Commentaires "On "
+- Commentaires " On "

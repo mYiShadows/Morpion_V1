@@ -19,14 +19,6 @@ body{
     font-size: 150px;
 }
 
-.pointeractif{
-    cursor: pointer;
-}
-
-.pointernonactif{
-    cursor: none;
-}
-
 .vegeta{
     background-image: url("Vegeta.jpg");
 }
